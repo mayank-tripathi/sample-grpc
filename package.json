@@ -1,0 +1,25 @@
+{
+  "name": "node-grpc-app-a",
+  "version": "1.0.0",
+  "description": "A hello world node app implementing grpc",
+  "main": "server.js",
+  "scripts": {
+    "test": "node test.js",
+    "a": "node server-a.js",
+    "b": "node server-b.js",
+    "c": "node server-c.js"
+  },
+  "keywords": [
+    "nodejs",
+    "grpc"
+  ],
+  "author": "mayank.tripathi786@live.com",
+  "license": "ISC",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.6.10",
+    "@grpc/proto-loader": "^0.7.2",
+    "async": "^3.2.4",
+    "google-protobuf": "^3.21.0",
+    "lorem-ipsum": "^2.0.8"
+  }
+}

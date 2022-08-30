@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mt-grpc-deployment-b
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mt-grpc-b
+  template:
+    metadata:
+      labels:
+        app: mt-grpc-b
+    spec:
+      containers:
+        - name: test-grpc-b
+          image: mayanktripathi21/test-grpc-b:0.6
+          ports:
+            - containerPort: 8080
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mt-grpc-deployment-c
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mt-grpc-c
+  template:
+    metadata:
+      labels:
+        app: mt-grpc-c
+    spec:
+      containers:
+        - name: test-grpc-c
+          image: mayanktripathi21/test-grpc-b:0.6
+          ports:
+            - containerPort: 8080
+
+--- 
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mt-grpc-deployment-a
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mt-grpc-a
+  template:
+    metadata:
+      labels:
+        app: mt-grpc-a
+    spec:
+      containers:
+        - name: test-grpc-a
+          image: mayanktripathi21/test-grpc-a:0.6
+          ports:
+            - containerPort: 8080

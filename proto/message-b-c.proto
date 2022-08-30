@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package messageGenerator;
+
+import "google/protobuf/empty.proto";
+
+service MessageGenerator {
+  rpc GetMessage (google.protobuf.Empty) returns (RandomMessage) {}
+}
+
+message RandomMessage {
+  string message = 1;
+}
