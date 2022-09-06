@@ -11,6 +11,8 @@ spec:
     metadata:
       labels:
         app: mt-grpc-b
+      # annotations:
+      #   sidecar.istio.io/inject: 'true'
     spec:
       containers:
         - name: test-grpc-b
@@ -33,6 +35,8 @@ spec:
     metadata:
       labels:
         app: mt-grpc-c
+      # annotations:
+      #   sidecar.istio.io/inject: 'true'
     spec:
       containers:
         - name: test-grpc-c
@@ -41,6 +45,30 @@ spec:
             - containerPort: 8080
 
 --- 
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mt-grpc-deployment-a-insecure
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mt-grpc-a-insecure
+  template:
+    metadata:
+      labels:
+        app: mt-grpc-a-insecure
+      # annotations:
+      #   sidecar.istio.io/inject: 'true'
+    spec:
+      containers:
+        - name: test-grpc-c
+          image: mayanktripathi21/test-grpc-a:0.6
+          ports:
+            - containerPort: 8080
+
+---
 
 apiVersion: apps/v1
 kind: Deployment
@@ -55,9 +83,19 @@ spec:
     metadata:
       labels:
         app: mt-grpc-a
+      # annotations:
+      #   sidecar.istio.io/inject: 'true'
     spec:
+      volumes:
+        - name: ingress-w-ssl-storage-dev-cert
+          secret:
+            secretName: ingress-mt-test-grpc-cert
+            defaultMode: 420
       containers:
         - name: test-grpc-a
-          image: mayanktripathi21/test-grpc-a:0.6
+          image: mayanktripathi21/test-grpc-a:0.10
+          volumeMounts:
+            - name: ingress-w-ssl-storage-dev-cert
+              mountPath: /usr/src/app/certs
           ports:
             - containerPort: 8080
