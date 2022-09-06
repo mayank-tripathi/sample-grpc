@@ -1,4 +1,5 @@
 const { getAllMessages, getMessage } = require('./app/messages');
-const { startServer } = require('./app/server');
+const { startSecureServer, startServer } = require('./app/server');
 
-startServer(process.env.PORT || 8081, { getMessage, getAllMessages }, 'message-a.proto');
+startSecureServer(process.env.PORT || 8081, { getMessage, getAllMessages }, 'message-a.proto');
+// startServer(process.env.PORT || 8081, { getMessage, getAllMessages }, 'message-a.proto');
